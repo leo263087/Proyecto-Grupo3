@@ -1,0 +1,31 @@
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto_Grupo3.InventarioPage"
+             Title="Inventario de Productos"
+             Background="#1A2028">
+
+    <StackLayout Padding="20">
+        <Label Text="Inventario Completo"
+               FontSize="20"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+
+        <ListView x:Name="InventarioListView"
+                  SelectionMode="None"
+                  Margin="0,10,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding .}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Cerrar"
+                Background="#CC0000"
+                Clicked="OnCloseClicked"
+                HorizontalOptions="Center"/>
+    </StackLayout>
+
+</ContentPage>
