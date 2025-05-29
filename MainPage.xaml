@@ -54,7 +54,12 @@
                     <TextCell Text="{Binding .}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <!-- btn ver productos -->
         </ListView>
+        <Button Text="Ir a la segunda página"
+        Clicked="OnNavigateButtonClicked"
+        HorizontalOptions="Center"
+        VerticalOptions="End"/>
 
     </Grid>
 </ContentPage>

@@ -16,6 +16,10 @@ namespace Proyecto_Grupo3
             OriginalItems = new ObservableCollection<string>();
             ItemsListView.ItemsSource = Items;
         }
+        private async void OnNavigateButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new categoria.NewPage1());
+        }
 
         private void OnAddClicked(object sender, EventArgs e)
         {
