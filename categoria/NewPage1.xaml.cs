@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Proyecto_Grupo3.categoria;
 
@@ -11,45 +12,81 @@ public partial class NewPage1 : ContentPage
         public string Descripcion { get; set; }
         public string Categoria { get; set; }
     }
-    public class ProductosViewModel
+
+    public class ProductosViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Producto> Productos { get; set; }
+
+        private string textoBusqueda;
+        public string TextoBusqueda
+        {
+            get => textoBusqueda;
+            set
+            {
+                if (textoBusqueda != value)
+                {
+                    textoBusqueda = value;
+                    OnPropertyChanged(nameof(TextoBusqueda));
+                    OnPropertyChanged(nameof(ProductosFiltrados)); // Notifica que la lista filtrada ha cambiado
+                }
+            }
+        }
+
+        public IEnumerable<Producto> ProductosFiltrados
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(TextoBusqueda))
+                    return Productos; // Mostrar todos los productos si no hay texto de búsqueda
+                return Productos.Where(p =>
+                    p.Nombre.Contains(TextoBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                    p.ID.Contains(TextoBusqueda, StringComparison.OrdinalIgnoreCase)); // Filtrar por nombre o ID
+            }
+        }
+
+        public Command<Producto> EliminarProductoCommand { get; }
 
         public ProductosViewModel()
         {
             Productos = new ObservableCollection<Producto>
+            {
+                new Producto { Nombre = "Laptop", ID = "001", Descripcion = "Laptop potente", Categoria = "Electrónica" },
+                new Producto { Nombre = "Mouse", ID = "002", Descripcion = "Mouse ergonómico", Categoria = "Accesorios" },
+                new Producto { Nombre = "Teclado", ID = "003", Descripcion = "Teclado mecánico", Categoria = "Accesorios" }
+            };
+
+            EliminarProductoCommand = new Command<Producto>(EliminarProducto);
+        }
+
+        private void EliminarProducto(Producto producto)
         {
-            new Producto { Nombre = "Laptop", ID = "001", Descripcion = "Laptop potente", Categoria = "Electrónica" },
-            new Producto { Nombre = "Mouse", ID = "002", Descripcion = "Mouse ergonómico", Categoria = "Accesorios" }
-        };
+            if (producto != null)
+            {
+                Productos.Remove(producto);
+                OnPropertyChanged(nameof(ProductosFiltrados)); // Actualiza la lista filtrada
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    
+
     public NewPage1()
-	{
-		InitializeComponent();
-        BindingContext = new ProductosViewModel(); 
+    {
+        InitializeComponent();
+        var viewModel = new ProductosViewModel();
+        BindingContext = viewModel;
+
+        // Forzar la actualización inicial
+        viewModel.TextoBusqueda = string.Empty;
     }
-    private void OnSeleccionProducto(object sender, SelectionChangedEventArgs e)
+
+    private async void OnSeleccionProducto(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is Producto productoSeleccionado)
-        {
-            // Actualizar los detalles en la UI
-            NombreLabel.Text = productoSeleccionado.Nombre;
-            IDLabel.Text = "ID: " + productoSeleccionado.ID;
-            DescripcionLabel.Text = "Descripción: " + productoSeleccionado.Descripcion;
-            CategoriaLabel.Text = "Categoría: " + productoSeleccionado.Categoria;
-
-            // Mostrar el frame con los detalles
-            DetallesFrame.IsVisible = true;
-        }
-    }
-    private async void OnProductSelected(object sender, SelectionChangedEventArgs e)
-    {
-        // Obtén el producto seleccionado
-        var productoSeleccionado = e.CurrentSelection.FirstOrDefault() as Producto;
-
-        if (productoSeleccionado != null)
         {
             // Muestra un mensaje con los detalles del producto
             await DisplayAlert("Detalles del Producto",
@@ -62,19 +99,5 @@ public partial class NewPage1 : ContentPage
             // Deselecciona el producto después de mostrar el mensaje
             ((CollectionView)sender).SelectedItem = null;
         }
-    }
-
-    private void OnButtonClicked(object sender, EventArgs e)
-    {
-        // Crear una nueva barra (puede ser un BoxView o cualquier otro control)
-        var nuevaBarra = new BoxView
-        {
-            HeightRequest = 5,
-            WidthRequest = 300,
-            BackgroundColor = Colors.Black
-        };
-
-        // Agregar la barra al contenedor
-        BarContainer.Children.Add(nuevaBarra);
     }
 }

@@ -6,46 +6,48 @@
              Background="#1A2028">
 
     <Grid RowDefinitions="Auto, *, Auto"
-          ColumnDefinitions="*, *"
+          ColumnDefinitions="*"
           Padding="20">
 
         <!-- Campo para ingresar productos -->
         <Entry Grid.Row="0"
                Grid.Column="0"
-               Grid.ColumnSpan="2"
+               Placeholder="Ingrese nuevo producto"
                x:Name="NewItemEntry"
                Margin="0,0,0,10"/>
 
         <!-- Campo para ingresar término de búsqueda -->
         <Entry Grid.Row="0"
                Grid.Column="0"
-               Grid.ColumnSpan="2"
                Placeholder="Buscar producto"
                x:Name="SearchEntry"
                Margin="0,10,0,10"/>
 
-        <!-- Botón para agregar productos -->
-        <Button Grid.Row="2"
-                Grid.Column="0"
-                Text="Agregar Producto"
-                Background="#0066CC"
-                Clicked="OnAddClicked"
-                HorizontalOptions="Center"
-                Margin="0,-500,5,500"/>
+        <!-- Contenedor para centrar los botones -->
+        <VerticalStackLayout Grid.Row="2"
+                             Grid.Column="0"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+            <!-- Botón para agregar productos -->
+            <Button Text="Agregar Producto"
+                    Background="#0066CC"
+                    Clicked="OnAddClicked"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,10"/>
 
-        <!-- Botón para buscar productos -->
-        <Button Grid.Row="2"
-                Grid.Column="1"
-                Text="Buscar Producto"
-                Background="#0066CC"
-                Clicked="OnSearchClicked"
-                HorizontalOptions="Center"
-                Margin="5,-500,5,500"/>
+     
+
+            <!-- Botón para navegar a la segunda página -->
+            <Button Text="Ir a la segunda página"
+                    Background="#0066CC"
+                    Clicked="OnNavigateButtonClicked"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,10"/>
+        </VerticalStackLayout>
 
         <!-- ListView para mostrar productos -->
         <ListView Grid.Row="1"
                   Grid.Column="0"
-                  Grid.ColumnSpan="2"
                   x:Name="ItemsListView"
                   SelectionMode="Single"
                   Margin="0,10,0,10">
@@ -54,12 +56,6 @@
                     <TextCell Text="{Binding .}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <!-- btn ver productos -->
         </ListView>
-        <Button Text="Ir a la segunda página"
-        Clicked="OnNavigateButtonClicked"
-        HorizontalOptions="Center"
-        VerticalOptions="End"/>
-
     </Grid>
 </ContentPage>

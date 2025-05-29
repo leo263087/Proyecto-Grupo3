@@ -4,26 +4,44 @@
              x:Class="Proyecto_Grupo3.categoria.NewPage1"
              Title="Inventario">
     <VerticalStackLayout>
+        <!-- Título de la página -->
         <Label 
             Text="Lista de productos"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="False" FlowDirection="LeftToRight" />
-        <StackLayout x:Name="BarContainer" Orientation="Vertical"/>
-        <CollectionView ItemsSource="{Binding Productos}" SelectionMode="Single" SelectionChanged="OnProductSelected">
+            HorizontalOptions="Center" 
+            AutomationProperties.IsInAccessibleTree="False" 
+            FlowDirection="LeftToRight" />
+
+        <!-- Barra de búsqueda -->
+        <SearchBar Placeholder="Buscar por nombre o ID"
+                   Text="{Binding TextoBusqueda, Mode=TwoWay}" />
+
+        <!-- Lista de productos -->
+        <CollectionView ItemsSource="{Binding ProductosFiltrados}" SelectionMode="Single" SelectionChanged="OnSeleccionProducto">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BackgroundColor="#0066CC">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Nombre}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
-                            <Label Text="{Binding Descripcion}" FontSize="14"/>
-                            <Label Text="{Binding Categoria}" FontSize="12" TextColor="Black"/>
-                        </VerticalStackLayout>
+                    <Frame Padding="10" Margin="5" BackgroundColor="#0066CC" CornerRadius="10">
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <!-- Información del producto -->
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Nombre}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="{Binding Descripcion}" FontSize="14"/>
+                                <Label Text="{Binding Categoria}" FontSize="12" TextColor="Black"/>
+                            </VerticalStackLayout>
+
+                            <!-- Botón de eliminación al extremo derecho -->
+                            <Button Grid.Column="1" 
+                                    Text="Eliminar"
+                                    BackgroundColor="Red"
+                                    TextColor="White"
+                                    Command="{Binding Path=BindingContext.EliminarProductoCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-
 
         <!-- Detalles del producto seleccionado -->
         <Frame x:Name="DetallesFrame" IsVisible="False" Padding="15" BackgroundColor="LightBlue" Margin="10">
@@ -34,6 +52,5 @@
                 <Label x:Name="CategoriaLabel" FontSize="14" TextColor="Gray"/>
             </VerticalStackLayout>
         </Frame>
-
     </VerticalStackLayout>
 </ContentPage>
