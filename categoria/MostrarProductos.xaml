@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto_Grupo3.categoria.NewPage1"
+             Title="Inventario">
+    <VerticalStackLayout>
+        <!-- Título de la página -->
+        <Label 
+            Text="Lista de productos"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <!-- Barra de búsqueda -->
+        <SearchBar Placeholder="Buscar por nombre o ID"
+                   Text="{Binding TextoBusqueda, Mode=TwoWay}" />
+
+        <!-- Lista de productos -->
+        <CollectionView ItemsSource="{Binding ProductosFiltrados}" 
+                SelectionMode="Single"
+                SelectionChanged="OnSeleccionProducto">
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BackgroundColor="#0066CC" CornerRadius="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <!-- Información del producto -->
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Nombre}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="{Binding Descripcion}" FontSize="14"/>
+                                <Label Text="{Binding Categoria}" FontSize="12" TextColor="Black"/>
+                                <Label Text="{Binding ID}" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                            <!-- Botón de eliminación al extremo derecho -->
+                            <HorizontalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="End">
+                                <Button
+                                ImageSource="trash.png"
+                                BackgroundColor="#007ACC"
+                                Command="{Binding Path=BindingContext.EliminarProductoCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding .}"
+                                WidthRequest="48"
+                                HeightRequest="48"
+                                Padding="0"
+                                ContentLayout="Top,0"/> 
+
+
+                                <Button 
+                                 Text="Editar"
+                                 Clicked="OnEditarProductoClicked"
+                                 CommandParameter="{Binding .}"
+                                 BackgroundColor="#007ACC"
+                                 TextColor="White"
+                                 WidthRequest="80"
+                                 HeightRequest="35"
+                                 FontSize="12"/>    
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

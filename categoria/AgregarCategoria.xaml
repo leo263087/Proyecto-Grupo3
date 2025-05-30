@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto_Grupo3.categoria.AgregarCategoria"
+             Title="Agregar Categoría"
+             BackgroundColor="#2D3A4B">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Categoría principal -->
+            <Label Text="Nombre de la categoría" />
+            <Entry x:Name="NombreCategoriaEntry" Placeholder="Introduce el nombre de la categoría" />
+
+            <Label Text="Propiedades de la categoría" />
+            <StackLayout x:Name="CategoriasStack" />
+
+            <Button Text="Agregar propiedad" Clicked="OnAgregarCategoriaClicked" BackgroundColor="#007ACC" TextColor="White"/>
+
+            <!-- Subcategoría -->
+            <BoxView HeightRequest="1" Color="#DDD" Margin="0,10"/>
+            <Label Text="Nombre de la subcategoría (opcional)" />
+            <Entry x:Name="NombreSubcategoriaEntry" Placeholder="Introduce el nombre de la subcategoría" />
+
+            <Label Text="Propiedades de la subcategoría" />
+            <StackLayout x:Name="SubcategoriasStack" />
+
+            <Button Text="Agregar propiedad a subcategoría" Clicked="OnAgregarSubcategoriaClicked" BackgroundColor="#007ACC" TextColor="White"/>
+             
+            <Button Text="Confirmar" Clicked="OnConfirmarClicked" BackgroundColor="#007ACC" TextColor="White"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto_Grupo3.Login"
+             Title="Iniciar Sesion">
+    <ContentPage.Resources>
+        <Color x:Key="EntryFocusedIndicatorColor">#007ACC</Color>
+    </ContentPage.Resources>
+    <VerticalStackLayout Margin="15" Spacing="10">
+        <Label 
+    Text="Bienvenido de nuevo!" 
+    HorizontalOptions="Center"
+    HorizontalTextAlignment="Center"
+    FontSize="28"/>
+
+        <Image 
+    Source="company.png" 
+    Aspect="AspectFit" 
+    HeightRequest="100" 
+    WidthRequest="100"
+    HorizontalOptions="Center"
+    Margin="0,20,0,10"/>
+
+        <Entry Placeholder="Usuario" x:Name="EUser"/>
+        <Grid ColumnDefinitions="*, auto" RowDefinitions="*">
+            <Entry Placeholder="Contraseña" IsPassword="True" x:Name="EPassword" Grid.Row="0" Grid.Column="0"/>
+            <ImageButton Source="ic_visibility_off.png" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" HorizontalOptions="End"
+                         x:Name="ImgBtnShowPassword" Clicked="Clicked" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+        <Button x:Name="BtnLogin"
+                Text="Iniciar sesión"
+                Clicked="Clicked"
+                BackgroundColor="#007ACC"
+                TextColor="White"/>
+    </VerticalStackLayout>
+</ContentPage>
