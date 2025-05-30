@@ -1,55 +1,64 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
+using System.Linq; 
 using Microsoft.Maui.Controls;
+using System.Text.Json; 
+
 
 namespace Proyecto_Grupo3
 {
+    
     public partial class MainPage : ContentPage
     {
-        private ObservableCollection<string> Items { get; set; }
-        private ObservableCollection<string> OriginalItems { get; set; } // Guarda la lista original
+        
+        private ObservableCollection<Producto> Items { get; set; }
+       
 
         public MainPage()
         {
             InitializeComponent();
-            Items = new ObservableCollection<string>();
-            OriginalItems = new ObservableCollection<string>();
+            
+            Items = new ObservableCollection<Producto>();
             ItemsListView.ItemsSource = Items;
+
+            CargarDatosDePrueba();
         }
+
+        
         private async void OnNavigateButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new categoria.NewPage1());
+            
+            await Navigation.PushAsync(new categoria.NewPage1()); 
         }
 
-        private void OnAddClicked(object sender, EventArgs e)
+       
+        private async void OnAgregarProductoClicked(object sender, EventArgs e)
         {
-            string newItem = NewItemEntry.Text.Trim();
+            var agregarProductoPage = new AgregarProductoPage();
 
-            if (!string.IsNullOrWhiteSpace(newItem))
+            
+            agregarProductoPage.ProductoAgregadoCallback = (nuevoProducto) =>
             {
-                Items.Add(newItem);
-                OriginalItems.Add(newItem); // Guardar el original para búsqueda
-                NewItemEntry.Text = string.Empty;
-            }
-            else
-            {
-                DisplayAlert("Advertencia", "Por favor, ingrese un texto para agregar.", "OK");
-            }
+                if (nuevoProducto != null)
+                {
+                    Items.Add(nuevoProducto); 
+                    DisplayAlert("Éxito", $"Producto '{nuevoProducto.Nombre}' agregado al inventario.", "OK");
+                }
+            };
+
+           
+            await Navigation.PushAsync(agregarProductoPage);
         }
 
-        private void OnSearchClicked(object sender, EventArgs e)
+        
+        private void CargarDatosDePrueba()
         {
-            string searchText = SearchEntry.Text?.Trim().ToLower();
-
-            if (string.IsNullOrWhiteSpace(searchText))
-            {
-                ItemsListView.ItemsSource = Items; // Mostrar lista completa si el campo está vacío
-            }
-            else
-            {
-                var filteredItems = OriginalItems.Where(item => item.ToLower().Contains(searchText)).ToList();
-                ItemsListView.ItemsSource = new ObservableCollection<string>(filteredItems);
-            }
+            Items.Add(new Producto("P001", "Laptop", "Electrónica", "Potente laptop para gaming", 5, 1200.00m));
+            Items.Add(new Producto("P002", "Teclado Mecánico", "Periféricos", "Teclado RGB con switches Cherry MX", 10, 80.00m));
+            Items.Add(new Producto("P003", "Mouse Inalámbrico", "Periféricos", "Mouse ergonómico para oficina", 20, 25.00m));
         }
+
+        
     }
 }
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto_Grupo3.AgregarProductoPage" Title="Agregar Producto"
+             Shell.NavBarIsVisible="False" BackgroundColor="#2D3A4B">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="PlaceholderColor" Value="LightGray" />
+            <Setter Property="HeightRequest" Value="45" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Keyboard" Value="Text" />
+            <Setter Property="Margin" Value="0,5,0,10" />
+            <Setter Property="Padding" Value="10,0" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#007ACC" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="Margin" Value="0,20,0,0" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,Auto"
+          Padding="20">
+        <Button Text="X"
+                Grid.Column="1"
+                Grid.Row="0"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="24"
+                WidthRequest="40"
+                HeightRequest="40"
+                Clicked="OnCerrarClicked"
+                CornerRadius="0" />
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+            <VerticalStackLayout Spacing="0">
+                <Label Text="ID" />
+                <Entry x:Name="IdEntry" Placeholder="Introduce el ID del producto" />
+
+                <Label Text="Nombre" />
+                <Entry x:Name="NombreEntry" Placeholder="Introduce el nombre del producto" />
+
+                <Label Text="Categoría" />
+                <Entry x:Name="CategoriaEntry" Placeholder="Introduce la categoría del producto" />
+
+                <Label Text="Descripción" />
+                <Entry x:Name="DescripcionEntry" Placeholder="Introduce la descripción del producto" />
+
+                <Label Text="Cantidad" />
+                <Entry x:Name="CantidadEntry" Keyboard="Numeric" Placeholder="Introduce la cantidad" />
+
+                <Label Text="Precio unitario" />
+                <Entry x:Name="PrecioUnitarioEntry" Keyboard="Numeric" Placeholder="Introduce el precio unitario" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Text="Confirmar"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                Clicked="OnConfirmarClicked" />
+    </Grid>
+</ContentPage>
