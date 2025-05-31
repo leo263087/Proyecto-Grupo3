@@ -151,9 +151,9 @@ public partial class NewPage1 : ContentPage
                 $"ID: {productoSeleccionado.ID}\n" +
                 $"Descripción: {productoSeleccionado.Descripcion}\n" +
                 $"Cantidad: {productoSeleccionado.Cantidad}\n" +
-                $"Precio: {productoSeleccionado.Precio}\n" +
+                $"Precio: {productoSeleccionado.Precio}\n\n" +
                 $"Categoría: {categoriaNombre}\n" +
-                $"Propiedades de la categoría: {propiedadesCategoria}\n" +
+                $"Propiedades de la categoría: {propiedadesCategoria}\n\n" +
                 $"Subcategorías: {subcategorias}\n" +
                 $"Propiedades de subcategorías:\n{propiedadesSubcategorias}";
            // mensaje = productoSeleccionado.MostrarDetalles();

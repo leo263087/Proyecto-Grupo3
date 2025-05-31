@@ -24,32 +24,31 @@
                    VerticalOptions="Center"
                    Margin="0,200,0,20" FontFamily="Comic Sans MS"/>
 
-           
 
-            <VerticalStackLayout Grid.Row="2"
-                                 Grid.Column="0"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="Center"
-                                 Spacing="10">
+
+            <HorizontalStackLayout Grid.Row="1"
+                      Grid.Column="0"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Start"
+                      Spacing="15">
                 <Button Text="Agregar Producto"
-                        Background="#0066CC"
-                        TextColor="White"
-                        FontSize="16"
-                        CornerRadius="8"
-                        Padding="15,10"
-                        WidthRequest="200"
-                        Clicked="OnAgregarProductoClicked"  HorizontalOptions="Center"/>
+            Background="#0066CC"
+            TextColor="White"
+            FontSize="16"
+            CornerRadius="8"
+            Padding="15,10"
+            WidthRequest="200"
+            Clicked="OnAgregarProductoClicked"/>
+                <Button Text="Ver productos"
+            Background="#0066CC"
+            TextColor="White"
+            FontSize="16"
+            CornerRadius="8"
+            Padding="15,10"
+            WidthRequest="200"
+            Clicked="OnNavigateButtonClicked"/>
+            </HorizontalStackLayout>
 
-                <Button Text="Ir a la segunda página"
-                        Background="#0066CC"
-                        TextColor="White"
-                        FontSize="16"
-                        CornerRadius="8"
-                        Padding="15,10"
-                        WidthRequest="200"
-                        Clicked="OnNavigateButtonClicked"
-                        HorizontalOptions="Center"/>
-            </VerticalStackLayout>
         </Grid>
     </Grid>
 </ContentPage>
