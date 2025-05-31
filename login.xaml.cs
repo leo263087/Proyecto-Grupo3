@@ -9,7 +9,7 @@ public partial class Login : ContentPage
     {
         InitializeComponent();
     }
-
+    
     private void Clicked(object sender, EventArgs e)
     {
         if (sender is Button)

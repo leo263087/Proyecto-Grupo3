@@ -3,26 +3,39 @@
              x:Class="Proyecto_Grupo3.DefinirPropiedades"
              Title="Definir Propiedades"
              Shell.TitleColor="White">
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="20" Spacing="15">
         <Label Text="Selecciona una subcategoría" 
                FontAttributes="Bold"
                FontSize="18"
                Margin="0,10,0,0"
                TextColor="#007ACC"/>
-        <Picker
-    x:Name="CategoriaPicker"
-    Title="Selecciona una categoría"
-    ItemDisplayBinding="{Binding Nombre}"
-    SelectedIndexChanged="OnCategoriaSeleccionada"
-    WidthRequest="200"/>
+
+        <Label Text="Subcategoría:" FontAttributes="Bold" TextColor="White"/>
+        <Picker x:Name="SubcategoriaPicker"
+        Title="Selecciona una subcategoría"
+        ItemsSource="{Binding Subcategorias}"
+        ItemDisplayBinding="{Binding Nombre}"
+        SelectedIndexChanged="OnSubcategoriaSeleccionada" />
+
+        <Label Text="Propiedades:" FontAttributes="Bold" TextColor="White"/>
+        <VerticalStackLayout x:Name="PropiedadesStack" Spacing="10"/>
+        <Button Text="Confirmar"
+        Clicked="OnConfirmarClicked"
+        BackgroundColor="#007ACC"
+        TextColor="White"
+        HeightRequest="50"
+        CornerRadius="10"/>
 
 
-        <ScrollView>
-            <StackLayout x:Name="PropiedadesStack" Padding="20"/>
-        </ScrollView>
+
+        <Label Text="Propiedades:" FontAttributes="Bold" TextColor="White"/>
+        <VerticalStackLayout x:Name="PropiedadesStack2" Spacing="10"/>
+
         <Button Text="Confirmar"
                 Clicked="OnConfirmarClicked"
                 BackgroundColor="#007ACC"
-                TextColor="White"/>
+                TextColor="White"
+                HeightRequest="50"
+                CornerRadius="10"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -13,7 +13,7 @@ namespace Proyecto_Grupo3.categoria;
 public partial class AgregarCategoria : ContentPage
 {
     private const int MaxCategorias = 4;
-    private static List<Categoria> lista = new List<Categoria>();
+    private static List<Categoria> lista = new List<datos.Categoria>();
 
     public AgregarCategoria()
     {
@@ -57,7 +57,6 @@ public partial class AgregarCategoria : ContentPage
     private async void OnConfirmarClicked(object sender, EventArgs e)
     {
         // 1. Obtiene el texto del Entry donde se escribe el nombre de la categoría, quitando espacios al inicio y final.
-
         string nombreCategoria = NombreCategoriaEntry?.Text?.Trim() ?? string.Empty;
         var propiedadesCategoria = CategoriasStack.Children
             .OfType<Entry>()
@@ -72,28 +71,24 @@ public partial class AgregarCategoria : ContentPage
             .Where(text => !string.IsNullOrWhiteSpace(text))
             .ToList();
 
-     
-        // 2. Recorre todos los controles hijos de CategoriasStack, toma solo los Entry,
-        //    obtiene su texto, lo limpia y crea una lista solo con los que no están vacíos.
-       
-
-        // 3. Si el nombre de la categoría está vacío, muestra un mensaje de error y termina la función.
+        // 2. Validaciones
         if (string.IsNullOrWhiteSpace(nombreCategoria))
         {
             await DisplayAlert("Error", "Debes ingresar el nombre de la categoría.", "OK");
             return;
         }
 
-        // 4. Si no hay propiedades ingresadas, muestra un mensaje de error y termina la función.
         if (propiedadesCategoria.Count == 0)
         {
-            await DisplayAlert("Error", "Agrega al menos una propiedad.", "OK");
+            await DisplayAlert("Error", "Agrega al menos una propiedad para la categoría.", "OK");
             return;
         }
 
+        // 3. Crear la categoría y agregar propiedades
         var categoria = new Proyecto_Grupo3.datos.Categoria(nombreCategoria);
-       
         categoria.AgregarPropiedad(propiedadesCategoria);
+
+        // 4. Crear la subcategoría y agregar propiedades si existe
         if (!string.IsNullOrWhiteSpace(nombreSubcategoria))
         {
             var subcategoria = new Proyecto_Grupo3.datos.Categoria(nombreSubcategoria);
@@ -101,23 +96,19 @@ public partial class AgregarCategoria : ContentPage
             categoria.AgregarSubcategoria(subcategoria);
         }
 
-
-      
-      
-        categoria.Nombre = nombreCategoria;
-        // 6. Agrega la nueva categoría a la lista estática de categorías.
+        // 5. Agregar la categoría a la lista
         lista.Add(categoria);
 
-        // 7. Guarda la lista de categorías en un archivo JSON y obtiene la ruta del archivo.
+        // 6. Guardar la lista de categorías en un archivo JSON
         string ruta = await GuardarCategoriaComoJsonAsync("categoria.json");
 
-   
-        // 9. Muestra un mensaje de confirmación con el nombre y las propiedades de la categoría creada.
+        // 7. Mostrar mensaje de confirmación
         await DisplayAlert("Categoría creada", $"Nombre: {nombreCategoria}\nPropiedades: {string.Join(", ", propiedadesCategoria)}", "OK");
 
-        // 10. Cierra la página actual y vuelve a la anterior.
+        // 8. Cierra la página actual y vuelve a la anterior
         await Navigation.PopAsync();
     }
+    
 
 
     [SupportedOSPlatform("ios11.0")]

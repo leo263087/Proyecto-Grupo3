@@ -1,4 +1,5 @@
 using System.Text.Json;
+using static Proyecto_Grupo3.datos;
 
 namespace Proyecto_Grupo3;
 
@@ -18,12 +19,12 @@ public partial class EditarProductoPage : ContentPage
         // Cargar la lista de productos desde el archivo
         string fileName = "productos.json";
         string fullPath = Path.Combine(FileSystem.AppDataDirectory, fileName);
-        List<Producto> productos = new();
+        List<datos.Producto> productos = new();
 
         if (File.Exists(fullPath))
         {
             string json = await File.ReadAllTextAsync(fullPath);
-            productos = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
+            productos = JsonSerializer.Deserialize<List<datos.Producto>>(json) ?? new List<datos.Producto>();
         }
 
         // Buscar y actualizar el producto en la lista

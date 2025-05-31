@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static Proyecto_Grupo3.Datos;
+using static Proyecto_Grupo3.datos;
 
 namespace Proyecto_Grupo3//todos los que dicen guna2textbox son espacios en blanco donde se piden al usuario ingresar un dato
 {

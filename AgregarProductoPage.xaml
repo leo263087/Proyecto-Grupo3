@@ -14,16 +14,16 @@
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="PlaceholderColor" Value="LightGray" />
             <Setter Property="HeightRequest" Value="45" />
-            <Setter Property="CornerRadius" Value="8" />
+           
             <Setter Property="Keyboard" Value="Text" />
             <Setter Property="Margin" Value="0,5,0,10" />
-            <Setter Property="Padding" Value="10,0" />
+           
         </Style>
         <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="#007ACC" />
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="CornerRadius" Value="15" />
             <Setter Property="HeightRequest" Value="50" />
             <Setter Property="Margin" Value="0,20,0,0" />
         </Style>
@@ -52,7 +52,14 @@
                 <Entry x:Name="NombreEntry" Placeholder="Introduce el nombre del producto" />
 
                 <Label Text="Categoría" />
-                <Entry x:Name="CategoriaEntry" Placeholder="Introduce la categoría del producto" />
+                <Picker
+    x:Name="CategoriaPicker"
+    Title="Selecciona una categoría"
+    SelectedIndexChanged="OnCategoriaSeleccionada" />
+                <StackLayout x:Name="PropiedadesStack" Spacing="5" />
+
+
+
 
                 <Label Text="Descripción" />
                 <Entry x:Name="DescripcionEntry" Placeholder="Introduce la descripción del producto" />
@@ -65,11 +72,22 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Button Text="Confirmar"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                HorizontalOptions="Center"
-                WidthRequest="200"
-                Clicked="OnConfirmarClicked" />
+        <HorizontalStackLayout
+    Grid.Row="2"
+    Grid.ColumnSpan="2"
+    Spacing="10"
+    HorizontalOptions="Center">
+            <Button
+        Text="Confirmar"
+        Clicked="OnConfirmarClicked"
+        BackgroundColor="#007ACC"
+        TextColor="White"/>
+            <Button
+        Text="Agregar categoría"
+        Clicked="OnAgregarCategoriaClicked"
+        BackgroundColor="#007ACC"
+        TextColor="White"/>
+        </HorizontalStackLayout>
+
     </Grid>
 </ContentPage>

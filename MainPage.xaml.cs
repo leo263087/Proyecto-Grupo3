@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq; 
 using Microsoft.Maui.Controls;
-using System.Text.Json; 
+using System.Text.Json;
+using static Proyecto_Grupo3.datos;
 
 
 namespace Proyecto_Grupo3
@@ -10,7 +11,7 @@ namespace Proyecto_Grupo3
     public partial class MainPage : ContentPage
     {
         
-        private ObservableCollection<Producto> Items { get; set; }
+        private ObservableCollection<datos.Producto> Items { get; set; }
        
 
         public MainPage()
@@ -20,7 +21,7 @@ namespace Proyecto_Grupo3
             Items = new ObservableCollection<Producto>();
             ItemsListView.ItemsSource = Items;
 
-            CargarDatosDePrueba();
+           // CargarDatosDePrueba();
         }
 
         
@@ -49,14 +50,14 @@ namespace Proyecto_Grupo3
             await Navigation.PushAsync(agregarProductoPage);
         }
 
-        
+        /*
         private void CargarDatosDePrueba()
         {
             Items.Add(new Producto("P001", "Laptop", "Electrónica", "Potente laptop para gaming", 5, 1200.00m));
             Items.Add(new Producto("P002", "Teclado Mecánico", "Periféricos", "Teclado RGB con switches Cherry MX", 10, 80.00m));
             Items.Add(new Producto("P003", "Mouse Inalámbrico", "Periféricos", "Mouse ergonómico para oficina", 20, 25.00m));
         }
-
+        */
         
     }
 }

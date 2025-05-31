@@ -49,7 +49,7 @@ public partial class NewPage1 : ContentPage
         public async Task CargarProductosAsync()
         {
             var productos = await CargarProductosDesdeJsonAsync("productos.json");
-            Productos.Clear();
+            this.Productos.Clear();
             foreach (var p in productos)
                 Productos.Add(p);
             OnPropertyChanged(nameof(ProductosFiltrados));
@@ -156,7 +156,7 @@ public partial class NewPage1 : ContentPage
                 $"Propiedades de la categoría: {propiedadesCategoria}\n" +
                 $"Subcategorías: {subcategorias}\n" +
                 $"Propiedades de subcategorías:\n{propiedadesSubcategorias}";
-            mensaje = productoSeleccionado.MostrarDetalles();
+           // mensaje = productoSeleccionado.MostrarDetalles();
             await DisplayAlert("Detalles del Producto", mensaje, "OK");
 
             ((CollectionView)sender).SelectedItem = null;

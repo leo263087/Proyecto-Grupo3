@@ -6,54 +6,70 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Grupo3
 {
-        public class Datos
+        public class datos
         {
 
-            class Categoria
+        public class Categoria
+        {
+            public string Nombre { get; set; }
+            public List<string> Propiedades { get; set; } // <-- Debe ser { get; set; }
+            public List<Categoria> Subcategorias { get; set; } // <-- Debe ser { get; set; }
+
+            public Categoria()
             {
-                public string Nombre { get; set; }
-                public List<string> Propiedades { get; private set; }
-                public List<Categoria> Subcategorias { get; private set; }
-
-                public Categoria(string nombre)
-                {
-                    Nombre = nombre;
-                    Propiedades = new List<string>();
-                    Subcategorias = new List<Categoria>();
-                }
-
-                public void AgregarPropiedad(string propiedad)
-                {
-                    Propiedades.Add(propiedad);
-                }
-
-                public List<string> ObtenerPropiedades()
-                {
-                    return new List<string>(Propiedades);
-                }
-
-                public void AgregarSubcategoria(Categoria subcategoria)
-                {
-                    Subcategorias.Add(subcategoria);
-                }
-
-                public List<Categoria> ObtenerSubcategorias()
-                {
-                    return new List<Categoria>(Subcategorias);
-                }
+                Nombre = string.Empty;
+                Propiedades = new List<string>();
+                Subcategorias = new List<Categoria>();
             }
 
-            class Producto
+            public Categoria(string nombre)
             {
-                public string Nombre { get; set; }
+                Nombre = nombre;
+                Propiedades = new List<string>();
+                Subcategorias = new List<Categoria>();
+            }
+
+            public void AgregarPropiedad(List<string> propiedad)
+            {
+                Propiedades = propiedad;
+            }
+
+            public List<string> ObtenerPropiedades()
+            {
+                return new List<string>(Propiedades);
+            }
+
+            public void AgregarSubcategoria(Categoria subcategoria)
+            {
+                Subcategorias.Add(subcategoria);
+            }
+
+            public List<Categoria> ObtenerSubcategorias()
+            {
+                return new List<Categoria>(Subcategorias);
+            }
+        }
+
+        public class usuario 
+                { 
+                    public static string nombre = "Company";
+                    public static int clave = 2630;
+
+                 }
+
+            public class Producto
+            {
+                public string ID { get; set; }
+                 public string Nombre { get; set; }
                 public string Descripcion { get; set; }
                 public int Cantidad { get; set; }
                 public float Precio { get; set; }
                 public Categoria Categoria { get; set; }
                 public Dictionary<string, string> PropiedadesEspecificas { get; private set; }
-
-                public Producto(string nombre, string descripcion, int cantidad, float precio, Categoria categoria)
+            public Producto() { }
+                public Producto(string Id, string nombre, string descripcion, int cantidad, float precio, Categoria categoria)
                 {
+                    ID = Id;    
                     Nombre = nombre;
                     Descripcion = descripcion;
                     Cantidad = cantidad;
@@ -82,7 +98,7 @@ namespace Proyecto_Grupo3
                 }
             }
 
-            class Inventario
+            public class Inventario
             {
                 private List<Producto> productos;
                 private List<Categoria> categorias;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic; 
-    public class Producto
+   /* public class Producto
     {
        
         public string ID { get; set; }
@@ -40,3 +40,4 @@
             return $"{Nombre} (ID: {ID}) | Cant: {Cantidad} | Precio: {Precio:C} | Cat: {categoriaNombre}";
         }
     }
+   */

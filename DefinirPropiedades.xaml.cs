@@ -1,52 +1,65 @@
 namespace Proyecto_Grupo3;
+
+using System.Runtime.Versioning;
 using static datos;
+
+[SupportedOSPlatform("MacCatalyst13.1"), SupportedOSPlatform("iOS11.0"), SupportedOSPlatform("Android21.0")]
 
 public partial class DefinirPropiedades : ContentPage
 {
-    private readonly List<datos.Categoria> _subcategorias;
-    private datos.Categoria _subcategoriaSeleccionada;
+    private Categoria categoriaActual;
 
-    public DefinirPropiedades(List<datos.Categoria> subcategorias)
+    public List<Categoria> Subcategorias { get; set; }
+
+    // Ensure the correct declaration of PropiedadesStack to avoid ambiguity  
+   
+    public DefinirPropiedades(Categoria categoria)
     {
         InitializeComponent();
-        _subcategorias = subcategorias ?? new();
-        SubcategoriaPicker.ItemsSource = _subcategorias.Select(s => s.Nombre).ToList();
+        categoriaActual = categoria;
+        Subcategorias = categoriaActual.Subcategorias ?? new List<Categoria>();
+        BindingContext = this; // Ahora el binding es a la página, no a la categoría  
     }
 
-    private void OnSubcategoriaSeleccionada(object sender, EventArgs e)
-    {
-        int idx = SubcategoriaPicker.SelectedIndex;
-        if (idx < 0) return;
+    // Elimina la propiedad extra PropiedadesStack
 
-        _subcategoriaSeleccionada = _subcategorias[idx];
-        GenerarCampos(_subcategoriaSeleccionada.Propiedades);
-    }
+    // ... el resto de tu clase igual ...
 
-    private void GenerarCampos(List<string> propiedades)
+    private void CrearEntrysParaPropiedades(List<string> propiedades)
     {
         PropiedadesStack.Children.Clear();
         foreach (var propiedad in propiedades)
         {
-            var label = new Label { Text = propiedad };
-            var entry = new Entry { Placeholder = $"Introduce {propiedad}", AutomationId = propiedad };
+            var label = new Label { Text = propiedad, TextColor = Colors.White };
+            var entry = new Entry { Placeholder = $"Definir {propiedad}", BackgroundColor = Colors.White, TextColor = Colors.Black, AutomationId = propiedad };
             PropiedadesStack.Children.Add(label);
             PropiedadesStack.Children.Add(entry);
         }
     }
 
+
+    private void OnSubcategoriaSeleccionada(object sender, EventArgs e)
+    {
+        if (SubcategoriaPicker.SelectedIndex == -1)
+            return;
+
+        var subcategoriaSeleccionada = SubcategoriaPicker.SelectedItem as Categoria;
+        if (subcategoriaSeleccionada != null)
+        {
+            CrearEntrysParaPropiedades(subcategoriaSeleccionada.Propiedades);
+        }
+    }
+
     private async void OnConfirmarClicked(object sender, EventArgs e)
     {
-        // Recoge los valores introducidos por el usuario para las propiedades de la subcategoría seleccionada
         var valores = new Dictionary<string, string>();
-        foreach (var propiedad in _subcategoriaSeleccionada.Propiedades)
+        foreach (var view in PropiedadesStack.Children)
         {
-            var entry = PropiedadesStack.Children
-                .OfType<Entry>()
-                .FirstOrDefault(e => e.AutomationId == propiedad);
-            valores[propiedad] = entry?.Text ?? string.Empty;
+            if (view is Entry entry && !string.IsNullOrWhiteSpace(entry.AutomationId))
+            {
+                valores[entry.AutomationId] = entry.Text ?? string.Empty;
+            }
         }
-
-        // Aquí puedes usar 'valores' según lo que necesites (guardar, enviar, etc.)
 
         await DisplayAlert("Propiedades guardadas",
             string.Join("\n", valores.Select(kv => $"{kv.Key}: {kv.Value}")),
@@ -54,4 +67,3 @@ public partial class DefinirPropiedades : ContentPage
         await Navigation.PopAsync();
     }
 }
-
