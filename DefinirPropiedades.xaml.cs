@@ -4,26 +4,21 @@ using System.Runtime.Versioning;
 using static datos;
 
 [SupportedOSPlatform("MacCatalyst13.1"), SupportedOSPlatform("iOS11.0"), SupportedOSPlatform("Android21.0")]
-
 public partial class DefinirPropiedades : ContentPage
 {
     private Categoria categoriaActual;
+    private readonly Action<Dictionary<string, string>> _callback;
 
     public List<Categoria> Subcategorias { get; set; }
 
-    // Ensure the correct declaration of PropiedadesStack to avoid ambiguity  
-   
-    public DefinirPropiedades(Categoria categoria)
+    public DefinirPropiedades(Categoria categoria, Action<Dictionary<string, string>> callback)
     {
         InitializeComponent();
         categoriaActual = categoria;
         Subcategorias = categoriaActual.Subcategorias ?? new List<Categoria>();
-        BindingContext = this; // Ahora el binding es a la página, no a la categoría  
+        _callback = callback;
+        BindingContext = this;
     }
-
-    // Elimina la propiedad extra PropiedadesStack
-
-    // ... el resto de tu clase igual ...
 
     private void CrearEntrysParaPropiedades(List<string> propiedades)
     {
@@ -36,7 +31,6 @@ public partial class DefinirPropiedades : ContentPage
             PropiedadesStack.Children.Add(entry);
         }
     }
-
 
     private void OnSubcategoriaSeleccionada(object sender, EventArgs e)
     {
@@ -61,9 +55,36 @@ public partial class DefinirPropiedades : ContentPage
             }
         }
 
-        await DisplayAlert("Propiedades guardadas",
-            string.Join("\n", valores.Select(kv => $"{kv.Key}: {kv.Value}")),
-            "OK");
+        // Devuelve los valores a la página anterior
+        _callback?.Invoke(valores);
+
         await Navigation.PopAsync();
     }
 }
+/* <ListView Grid.Row="1"
+                      Grid.Column="0"
+                      x:Name="ItemsListView"
+                      SelectionMode="Single"
+                      Margin="0,10,0,10"
+                      Background="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" BackgroundColor="#E0E0E0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Nombre}" FontSize="18" TextColor="Black" FontAttributes="Bold" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding ID, StringFormat='ID: {0}'}" FontSize="14" TextColor="Gray" HorizontalTextAlignment="End"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Descripcion}" FontSize="14" TextColor="DarkGray" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Cantidad, StringFormat='Cant: {0}'}" FontSize="14" TextColor="DarkCyan" HorizontalTextAlignment="End"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>*/

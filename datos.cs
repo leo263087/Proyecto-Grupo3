@@ -65,7 +65,7 @@ namespace Proyecto_Grupo3
                 public int Cantidad { get; set; }
                 public float Precio { get; set; }
                 public Categoria Categoria { get; set; }
-                public Dictionary<string, string> PropiedadesEspecificas { get; private set; }
+                public Dictionary<string, string> PropiedadesEspecificas { get;  set; }
             public Producto() { }
                 public Producto(string Id, string nombre, string descripcion, int cantidad, float precio, Categoria categoria)
                 {
