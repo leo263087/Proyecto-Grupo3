@@ -9,9 +9,14 @@
                FontSize="18"
                Margin="0,10,0,0"
                TextColor="#007ACC"/>
-        <Picker x:Name="SubcategoriaPicker"
-                Title="Elige una subcategoría"
-                SelectedIndexChanged="OnSubcategoriaSeleccionada"/>
+        <Picker
+    x:Name="CategoriaPicker"
+    Title="Selecciona una categoría"
+    ItemDisplayBinding="{Binding Nombre}"
+    SelectedIndexChanged="OnCategoriaSeleccionada"
+    WidthRequest="200"/>
+
+
         <ScrollView>
             <StackLayout x:Name="PropiedadesStack" Padding="20"/>
         </ScrollView>
