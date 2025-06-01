@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Proyecto_Grupo3.AgregarProductoPage" Title="Agregar Producto"
              Shell.NavBarIsVisible="False" BackgroundColor="#2D3A4B">
     <ContentPage.Resources>
+        
         <Style TargetType="Label">
-            <Setter Property="TextColor" Value="White" />
+            <Setter Property="TextColor" Value="Transparent" />
             <Setter Property="FontSize" Value="18" />
             <Setter Property="Margin" Value="0,10,0,0" />
         </Style>
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="White" />
             <Setter Property="PlaceholderColor" Value="LightGray" />
             <Setter Property="HeightRequest" Value="45" />
-           
             <Setter Property="Keyboard" Value="Text" />
             <Setter Property="Margin" Value="0,5,0,10" />
-           
+            
         </Style>
         <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="#007ACC" />
-            <Setter Property="TextColor" Value="White" />
+            <Setter Property="TextColor" Value="Transparent" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="CornerRadius" Value="15" />
             <Setter Property="HeightRequest" Value="50" />
@@ -37,7 +36,7 @@
                 HorizontalOptions="End"
                 VerticalOptions="Start"
                 BackgroundColor="Transparent"
-                TextColor="White"
+                TextColor="Transparent"
                 FontSize="24"
                 WidthRequest="40"
                 HeightRequest="40"
@@ -53,13 +52,10 @@
 
                 <Label Text="Categoría" />
                 <Picker
-    x:Name="CategoriaPicker"
-    Title="Selecciona una categoría"
-    SelectedIndexChanged="OnCategoriaSeleccionada" />
+                    x:Name="CategoriaPicker"
+                    Title="Selecciona una categoría"
+                    SelectedIndexChanged="OnCategoriaSeleccionada" />
                 <StackLayout x:Name="PropiedadesStack" Spacing="5" />
-
-
-
 
                 <Label Text="Descripción" />
                 <Entry x:Name="DescripcionEntry" Placeholder="Introduce la descripción del producto" />
@@ -73,21 +69,20 @@
         </ScrollView>
 
         <HorizontalStackLayout
-    Grid.Row="2"
-    Grid.ColumnSpan="2"
-    Spacing="10"
-    HorizontalOptions="Center">
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Spacing="10"
+            HorizontalOptions="Center">
             <Button
-        Text="Confirmar"
-        Clicked="OnConfirmarClicked"
-        BackgroundColor="#007ACC"
-        TextColor="White"/>
+                Text="Confirmar"
+                Clicked="OnConfirmarClicked"
+                BackgroundColor="#007ACC"
+                TextColor="Transparent"/>
             <Button
-        Text="Agregar categoría"
-        Clicked="OnAgregarCategoriaClicked"
-        BackgroundColor="#007ACC"
-        TextColor="White"/>
+                Text="Agregar categoría"
+                Clicked="OnAgregarCategoriaClicked"
+                BackgroundColor="#007ACC"
+                TextColor="Transparent"/>
         </HorizontalStackLayout>
-
     </Grid>
 </ContentPage>

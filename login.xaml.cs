@@ -8,8 +8,10 @@ public partial class Login : ContentPage
     public Login()
     {
         InitializeComponent();
+        NavigationPage.SetHasNavigationBar(this, false);
+
     }
-    
+
     private void Clicked(object sender, EventArgs e)
     {
         if (sender is Button)

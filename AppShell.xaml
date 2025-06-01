@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Proyecto_Grupo3"
     Shell.FlyoutBehavior="Disabled"
-    Title="Proyecto_Grupo3">
+    Title="Proyecto_Grupo3"
+    Shell.NavBarIsVisible="False">
 
     <ShellContent
         Title="Home"
