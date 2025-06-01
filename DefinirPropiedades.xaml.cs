@@ -19,14 +19,17 @@ public partial class DefinirPropiedades : ContentPage
         _callback = callback;
         BindingContext = this;
     }
-
+    private async void OnCerrarClicked(object dreadful, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
     private void CrearEntrysParaPropiedades(List<string> propiedades)
     {
         PropiedadesStack.Children.Clear();
         foreach (var propiedad in propiedades)
         {
             var label = new Label { Text = propiedad, TextColor = Colors.White };
-            var entry = new Entry { Placeholder = $"Definir {propiedad}", BackgroundColor = Colors.White, TextColor = Colors.Black, AutomationId = propiedad };
+            var entry = new Entry { Placeholder = $"Definir {propiedad}", BackgroundColor = Colors.Transparent, TextColor = Colors.White, AutomationId = propiedad };
             PropiedadesStack.Children.Add(label);
             PropiedadesStack.Children.Add(entry);
         }

@@ -5,26 +5,43 @@
              BackgroundColor="#2D3A4B">
 
     <VerticalStackLayout>
-    
+        <Button
+         Text="←"
+         FontSize="40"
+         BackgroundColor="Transparent"
+         TextColor="White"
+         HorizontalOptions="Start"
+         VerticalOptions="Start"
+         Clicked="OnVolverClicked"
+         Padding="0,0,0,0"
+         WidthRequest="65"
+         HeightRequest="48"/>   
 
         <!-- Barra de búsqueda -->
         <SearchBar Placeholder="Buscar por nombre o ID"
-                   Text="{Binding TextoBusqueda, Mode=TwoWay}" />
+                   Text="{Binding TextoBusqueda, Mode=TwoWay}" TextColor="White"/>
 
         <!-- Lista de productos -->
         <CollectionView ItemsSource="{Binding ProductosFiltrados}" 
                 SelectionMode="Single"
-                SelectionChanged="OnSeleccionProducto">
-            
+              >
+
+
+
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
+                    
                     <Frame Padding="10" Margin="5" BackgroundColor="#0066CC" CornerRadius="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProductoTapped" CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
                         <Grid ColumnDefinitions="*,Auto">
                             <!-- Información del producto -->
                             <VerticalStackLayout Grid.Column="0">
                                 <Label Text="{Binding Nombre}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
                                 <Label Text="{Binding Descripcion}" FontSize="14"/>
-                                <Label Text="{Binding Categoria.Nombre}" FontSize="12" TextColor="Black"/>
+                                <Label Text="{Binding Categoria.Nombre}" FontSize="12" TextColor="White"/>
                                 <Label Text="{Binding ID}" FontSize="12" TextColor="Gray"/>
                             </VerticalStackLayout>
                             <!-- Botón de eliminación al extremo derecho -->
@@ -37,8 +54,8 @@
                                 WidthRequest="48"
                                 HeightRequest="48"
                                 Padding="0"
-                                ContentLayout="Top,0"/> 
-
+                                ContentLayout="Top,0"/>
+                                
 
                                 <Button 
                        
@@ -47,8 +64,8 @@
                                  CommandParameter="{Binding .}"
                                  BackgroundColor="Transparent"
                                  TextColor="White"
-                                 WidthRequest="80"
-                                 HeightRequest="35"
+                                 WidthRequest="55"
+                                 HeightRequest="88"
                                  FontSize="12"/>    
                             </HorizontalStackLayout>
                         </Grid>

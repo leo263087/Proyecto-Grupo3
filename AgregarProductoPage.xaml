@@ -36,18 +36,19 @@
 
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,Auto"
           Padding="20">
-        <Button Text="X"
-                Grid.Column="1"
-                Grid.Row="0"
-                HorizontalOptions="End"
-                VerticalOptions="Start"
-                BackgroundColor="Transparent"
-                TextColor="Transparent"
-                FontSize="24"
-                WidthRequest="40"
-                HeightRequest="40"
-                Clicked="OnCerrarClicked"
-                CornerRadius="0" />
+        <Button
+         Text="←"
+         FontSize="40"
+         BackgroundColor="Transparent"
+         TextColor="White"
+         HorizontalOptions="Start"
+         VerticalOptions="Start"
+         Clicked="OnCerrarClicked"
+         Padding="0,0,0,0"
+         WidthRequest="40"
+         HeightRequest="48"/>
+
+
         <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
             <VerticalStackLayout Spacing="0">
                 <Label Text="ID" />

@@ -19,9 +19,7 @@ namespace Proyecto_Grupo3
             InitializeComponent();
             
             Items = new ObservableCollection<Producto>();
-            //ItemsListView.ItemsSource = Items;
-
-           // CargarDatosDePrueba();
+           
         }
 
         

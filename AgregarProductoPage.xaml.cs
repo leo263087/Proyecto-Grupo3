@@ -10,6 +10,7 @@ public partial class AgregarProductoPage : ContentPage
 {
     // Removed duplicate declaration of categoriasDisponibles  
     private List<datos.Categoria> categoriasDisponibles = new();
+    private List<Producto> Productos = new List<Producto>();
 
     protected override async void OnAppearing()
     {
@@ -94,6 +95,8 @@ public partial class AgregarProductoPage : ContentPage
                 propiedadesDefinidas = valores;
             }));
         }
+ 
+
     }
 
     private static async Task<List<Producto>> CargarProductosDesdeJsonAsync(string fileName)
@@ -125,7 +128,16 @@ public partial class AgregarProductoPage : ContentPage
             await DisplayAlert("Error de validación", "Por favor, complete todos los campos y asegúrese de que 'Cantidad' y 'Precio unitario' sean números válidos.", "OK");
             return;
         }
+        // Carga la lista actual de productos  
+        var productos = await CargarProductosDesdeJsonAsync("productos.json");
 
+        // Validación de ID único
+        string nuevoId = IdEntry.Text.Trim();
+        if (productos.Any(p => p.ID == nuevoId))
+        {
+            await DisplayAlert("ID duplicado", "El ID ingresado ya existe. Por favor, ingrese un ID único.", "OK");
+            return;
+        }
         // Inicializa la variable nuevoProducto antes de usarla  
         Producto nuevoProducto = new Producto
         {
@@ -138,9 +150,7 @@ public partial class AgregarProductoPage : ContentPage
             PropiedadesEspecificas = propiedadesDefinidas
         };
 
-        // Carga la lista actual de productos  
-        var productos = await CargarProductosDesdeJsonAsync("productos.json");
-
+       
         productos.Add(nuevoProducto);
 
         // Guarda la lista actualizada  

@@ -107,6 +107,11 @@ public partial class NewPage1 : ContentPage
         InitializeComponent();
         BindingContext = new ProductosViewModel();
     }
+    private async void OnVolverClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
     private async void OnEditarProductoClicked(object sender, EventArgs e)
     {
         if (sender is Button btn && btn.CommandParameter is Producto producto)
@@ -116,18 +121,42 @@ public partial class NewPage1 : ContentPage
         }
     }
 
-    private async void OnSeleccionProducto(object sender, SelectionChangedEventArgs e)
+
+    private async void OnProductoTapped(object sender, TappedEventArgs e)
     {
-        var producto = e.CurrentSelection.FirstOrDefault() as Producto;
-        if (producto != null)
+        if (e.Parameter is Producto producto)
         {
-            await DisplayAlert(
-                "Detalles del producto",
-                $"ID: {producto.ID}\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nCantidad: {producto.Cantidad}\nPrecio: {producto.Precio}",
-                "Cerrar");
-            ((CollectionView)sender).SelectedItem = null;
+            // Detalles básicos
+            string mensaje = $"ID: {producto.ID}\n" +
+                             $"Nombre: {producto.Nombre}\n" +
+                             $"Descripción: {producto.Descripcion}\n" +
+                             $"Cantidad: {producto.Cantidad}\n" +
+                             $"Precio: {producto.Precio}\n" +
+                             $"Categoría: {producto.Categoria?.Nombre ?? "Sin categoría"}";
+
+            // Subcategorías y propiedades
+            if (producto.Categoria?.Subcategorias != null && producto.Categoria.Subcategorias.Count > 0)
+            {
+                mensaje += "\n\nSubcategorías:";
+                foreach (var subcat in producto.Categoria.Subcategorias)
+                {
+                    mensaje += $"\n- {subcat.Nombre}";
+                    if (subcat.Propiedades != null && subcat.Propiedades.Count > 0)
+                    {
+                        mensaje += $"\n  Propiedades:";
+                        foreach (var prop in subcat.Propiedades)
+                        {
+                            mensaje += $"\n    • {prop}";
+                        }
+                    }
+                }
+            }
+
+            await DisplayAlert("Detalles del producto", mensaje, "Cerrar");
         }
     }
+
+
 
 
 }

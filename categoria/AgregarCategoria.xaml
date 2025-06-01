@@ -6,21 +6,33 @@
              BackgroundColor="#2D3A4B">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
+            <Button
+                Text="←"
+                FontSize="40"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Clicked="OnVolverClicked"
+                Padding="0,0,0,0"
+                WidthRequest="35"
+                HeightRequest="48"/>            
             <!-- Categoría principal -->
-            <Label Text="Nombre de la categoría" />
+            <Label Text="Nombre de la categoría" TextColor="White"/>
             <Entry x:Name="NombreCategoriaEntry" Placeholder="Introduce el nombre de la categoría" />
 
-            <Label Text="Propiedades de la categoría" />
+           
+            <Label Text="Propiedades de la categoría" TextColor="White"/>
             <StackLayout x:Name="CategoriasStack" />
 
             <Button Text="Agregar propiedad" Clicked="OnAgregarCategoriaClicked" BackgroundColor="#007ACC" TextColor="White"/>
 
             <!-- Subcategoría -->
             <BoxView HeightRequest="1" Color="#DDD" Margin="0,10"/>
-            <Label Text="Nombre de la subcategoría (opcional)" />
+            <Label Text="Nombre de la subcategoría (opcional)" TextColor="White"/>
             <Entry x:Name="NombreSubcategoriaEntry" Placeholder="Introduce el nombre de la subcategoría" />
 
-            <Label Text="Propiedades de la subcategoría" />
+            <Label Text="Propiedades de la subcategoría" TextColor="White"/>
             <StackLayout x:Name="SubcategoriasStack" />
 
             <Button Text="Agregar propiedad a subcategoría" Clicked="OnAgregarSubcategoriaClicked" BackgroundColor="#007ACC" TextColor="White"/>

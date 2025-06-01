@@ -1,29 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-           
              x:Class="Proyecto_Grupo3.MainPage"
              Title="Gestión de Productos"
-             Background="Transparent">
+             BackgroundColor="#0066CC">
     
+
     <Grid>
         <Image Source="fondo.jpg"
                Aspect="AspectFill"
                Opacity="0.6"
                HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand" />
-
+        <!-- Stack para apilar los textos arriba -->
+        <VerticalStackLayout Grid.Row="0"
+                      HorizontalOptions="Start"
+                      VerticalOptions="Start"
+                      Spacing="8">
+            <Label Text="Sistema de Gestión de Inventario"
+            FontSize="18"
+            TextColor="White"
+            HorizontalOptions="Start"
+            Margin="9,0,0,0"/>
+           
+        </VerticalStackLayout>
         <Grid RowDefinitions="Auto, *, Auto"
               ColumnDefinitions="*"
               Padding="20"
               HorizontalOptions="FillAndExpand"
               VerticalOptions="FillAndExpand">
 
-            <Label Text="Sistema de Gestión de Inventario"
+            <Label Text="Escoja una operacion"
                    Grid.Row="0"
                    FontSize="32" TextColor="White"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"
+                   VerticalOptions="End"
                    Margin="0,200,0,20" FontFamily="Comic Sans MS"/>
 
 
@@ -32,25 +43,26 @@
                       Grid.Column="0"
                       HorizontalOptions="Center"
                       VerticalOptions="Start"
-                      Spacing="15">
+                      Spacing="10">
                 <Button Text="Agregar Producto"
             Background="#0066CC"
             TextColor="White"
             FontSize="16"
             CornerRadius="8"
             Padding="15,10"
-            WidthRequest="200"
+            WidthRequest="190"
             Clicked="OnAgregarProductoClicked"/>
                 <Button Text="Ver productos"
             Background="#0066CC"
             TextColor="White"
             FontSize="16"
             CornerRadius="8"
-            Padding="15,10"
-            WidthRequest="200"
+            Padding="3,10"
+            WidthRequest="150"
             Clicked="OnNavigateButtonClicked"/>
             </HorizontalStackLayout>
 
         </Grid>
     </Grid>
+    
 </ContentPage>

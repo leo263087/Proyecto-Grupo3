@@ -4,7 +4,7 @@
              x:Class="Proyecto_Grupo3.Login"
              Title="Iniciar Sesion"
              BackgroundColor="#2D3A4B"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="True">
 
     <ContentPage.Resources>
         <Color x:Key="EntryFocusedIndicatorColor">#007ACC</Color>

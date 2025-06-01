@@ -9,7 +9,8 @@ using static Proyecto_Grupo3.datos;
 using System.Collections;
 using System.Runtime.Versioning;
 namespace Proyecto_Grupo3.categoria;
-
+[SupportedOSPlatform("ios11.0")]
+[SupportedOSPlatform("maccatalyst11.0")]
 public partial class AgregarCategoria : ContentPage
 {
     private const int MaxCategorias = 4;
@@ -32,8 +33,12 @@ public partial class AgregarCategoria : ContentPage
         };
         SubcategoriasStack.Children.Add(nuevaEntry);
     }
-    [SupportedOSPlatform("ios11.0")]
-    [SupportedOSPlatform("maccatalyst11.0")]
+   
+    private async void OnVolverClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
     private void OnAgregarCategoriaClicked(object sender, EventArgs e)
     {
         if (CategoriasStack.Children.Count < MaxCategorias)

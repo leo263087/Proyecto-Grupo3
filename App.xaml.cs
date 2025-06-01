@@ -6,10 +6,9 @@
         {
             InitializeComponent();
 
+           
             MainPage = new NavigationPage(new Login());
             NavigationPage.SetHasNavigationBar(this, false);
-
-
         }
     }
 }
