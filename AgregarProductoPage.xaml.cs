@@ -126,11 +126,8 @@ public partial class AgregarProductoPage : ContentPage
             return;
         }
 
-        // Carga la lista actual de productos
-        var productos = await CargarProductosDesdeJsonAsync("productos.json");
-
-        // Crea el nuevo producto
-        var nuevoProducto = new Producto
+        // Inicializa la variable nuevoProducto antes de usarla  
+        Producto nuevoProducto = new Producto
         {
             ID = IdEntry.Text,
             Nombre = NombreEntry.Text,
@@ -141,9 +138,12 @@ public partial class AgregarProductoPage : ContentPage
             PropiedadesEspecificas = propiedadesDefinidas
         };
 
+        // Carga la lista actual de productos  
+        var productos = await CargarProductosDesdeJsonAsync("productos.json");
+
         productos.Add(nuevoProducto);
 
-        // Guarda la lista actualizada
+        // Guarda la lista actualizada  
         await GuardarProductosComoJsonAsync(productos, "productos.json");
 
         ProductoAgregadoCallback?.Invoke(nuevoProducto);
