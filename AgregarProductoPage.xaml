@@ -3,12 +3,13 @@
              x:Class="Proyecto_Grupo3.AgregarProductoPage" Title="Agregar Producto"
              Shell.NavBarIsVisible="False" BackgroundColor="#2D3A4B">
     <ContentPage.Resources>
-        
+
         <Style TargetType="Label">
-            <Setter Property="TextColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="White" />
             <Setter Property="FontSize" Value="18" />
             <Setter Property="Margin" Value="0,10,0,0" />
         </Style>
+
         <Style TargetType="Entry">
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="TextColor" Value="White" />
@@ -18,6 +19,11 @@
             <Setter Property="Margin" Value="0,5,0,10" />
             
         </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="TitleColor" Value="LightGray" />
+        </Style>
+
         <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="#007ACC" />
             <Setter Property="TextColor" Value="Transparent" />
@@ -77,12 +83,12 @@
                 Text="Confirmar"
                 Clicked="OnConfirmarClicked"
                 BackgroundColor="#007ACC"
-                TextColor="Transparent"/>
+                TextColor="White"/>
             <Button
                 Text="Agregar categoría"
                 Clicked="OnAgregarCategoriaClicked"
                 BackgroundColor="#007ACC"
-                TextColor="Transparent"/>
+                TextColor="white"/>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

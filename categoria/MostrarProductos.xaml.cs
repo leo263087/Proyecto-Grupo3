@@ -118,51 +118,20 @@ public partial class NewPage1 : ContentPage
 
     private async void OnSeleccionProducto(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is datos.Producto productoSeleccionado)
+        var producto = e.CurrentSelection.FirstOrDefault() as Producto;
+        if (producto != null)
         {
-            // Información de la categoría principal
-            string categoriaNombre = productoSeleccionado.Categoria?.Nombre ?? "Sin categoría";
-            string propiedadesCategoria = "Sin propiedades";
-            if (productoSeleccionado.Categoria?.Propiedades != null && productoSeleccionado.Categoria.Propiedades.Any())
-            {
-                propiedadesCategoria = string.Join(", ", productoSeleccionado.Categoria.Propiedades);
-            }
-
-            // Información de subcategorías y sus propiedades
-            string subcategorias = "Sin subcategorías";
-            string propiedadesSubcategorias = "";
-            if (productoSeleccionado.Categoria?.Subcategorias != null && productoSeleccionado.Categoria.Subcategorias.Any())
-            {
-                subcategorias = string.Join(", ", productoSeleccionado.Categoria.Subcategorias.Select(s => s.Nombre));
-                propiedadesSubcategorias = string.Join(
-                    "\n",
-                    productoSeleccionado.Categoria.Subcategorias.Select(sub =>
-                        $"- {sub.Nombre}: {(sub.Propiedades != null && sub.Propiedades.Any() ? string.Join(", ", sub.Propiedades) : "Sin propiedades")}"
-                    )
-                );
-            }
-            else
-            {
-                propiedadesSubcategorias = "Sin propiedades de subcategorías";
-            }
-
-            string mensaje =
-                $"Nombre: {productoSeleccionado.Nombre}\n" +
-                $"ID: {productoSeleccionado.ID}\n" +
-                $"Descripción: {productoSeleccionado.Descripcion}\n" +
-                $"Cantidad: {productoSeleccionado.Cantidad}\n" +
-                $"Precio: {productoSeleccionado.Precio}\n\n" +
-                $"Categoría: {categoriaNombre}\n" +
-                $"Propiedades de la categoría: {propiedadesCategoria}\n\n" +
-                $"Subcategorías: {subcategorias}\n" +
-                $"Propiedades de subcategorías:\n{propiedadesSubcategorias}";
-           // mensaje = productoSeleccionado.MostrarDetalles();
-            await DisplayAlert("Detalles del Producto", mensaje, "OK");
-
+            await DisplayAlert(
+                "Detalles del producto",
+                $"ID: {producto.ID}\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nCantidad: {producto.Cantidad}\nPrecio: {producto.Precio}",
+                "Cerrar");
             ((CollectionView)sender).SelectedItem = null;
         }
     }
 
+
 }
+
+
 
 
